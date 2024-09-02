@@ -24,9 +24,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt]; then pip install -r requirements; fi
-          python install pycodestyle
+          pip install pycodestyle
       - name: check with pycodestyle
-        run: pycodestyle firstpro.py
+        run: pycodestyle firstproj.py
 
 
   build:
