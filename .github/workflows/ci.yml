@@ -23,7 +23,7 @@ jobs:
       - name: Install depencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt]; then pip install -r requirements; fi
+          if [ -f requirements.txt ]; then pip install -r requirements; fi
           pip install pycodestyle
       - name: check with pycodestyle
         run: pycodestyle firstproj.py
