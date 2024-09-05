@@ -48,3 +48,8 @@ jobs:
 
       - name: Run Python script
         run: python firstproj.py
+
+  run_main_workflow:
+    uses: ./main.yml  # Use main.yml as a reusable workflow
+    # with:
+    #   python-version: '3.9'

@@ -1,10 +1,12 @@
 ---
-name: testing and building and exachge
+name: workflow of testing and building and exachge
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call
+    # inputs:
+    #   python-version:
+    #     type: string
+    #     default: '3.8'
 
 jobs:
   just_test:
