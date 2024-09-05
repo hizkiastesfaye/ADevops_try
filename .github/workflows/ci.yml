@@ -1,5 +1,5 @@
 ---
-name: testing and building
+name: testing and building and exachge
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python: [3.7, 3.8, 3.9]
     steps:
-      - name: checkout code
+      - name: checkout code just
         uses: actions/checkout@v4
       - name: setup flake8
         uses: actions/flake8@v5
@@ -33,7 +33,7 @@ jobs:
         python: [3.7, 3.8, 3.9]
 
     steps:
-      - name: check out
+      - name: check out lint
         uses: actions/checkout@v4
       - name: setup python
         uses: actions/python-setup@v5
@@ -50,7 +50,7 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python: [3.7, 3.8, 3.9]
     steps:
-      - name: setup python
+      - name: setup pythonv3
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
