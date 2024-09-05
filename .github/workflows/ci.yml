@@ -13,20 +13,19 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python: [3.7, 3.8, 3.9]
     steps:
       - name: checkout code just
         uses: actions/checkout@v4
       - name: setup flake8
         uses: actions/flake8@v5
-        with: |
+        run: |
           python -m pip --upgrade pip
           pip install flake8
       - name: lint the codes
         run: flake8
 
   lint_yaml:
-    runs-on: ${{matrix.os}}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -36,9 +35,13 @@ jobs:
       - name: check out lint
         uses: actions/checkout@v4
       - name: setup python
-        uses: actions/python-setup@v5
+        uses: actions/setup-python@v5
         with:
           python-version: ${{matrix.python}}
+      - name: install pytest
+        run: |
+          python -m pip --upgrade pip
+          pip install pytest 
       - name: test python
         run: pytest
 
