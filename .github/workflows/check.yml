@@ -1,0 +1,61 @@
+---
+name: testing and building
+
+on:
+  push:
+    branches: main
+
+jobs:
+  just_test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: [3.7, 3.8, 3.9]
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      - name: setup flake8
+        uses: actions/flake8@v5
+        with: |
+          python -m pip --upgrade pip
+          pip install flake8
+      - name: lint the codes
+        run: flake8
+
+  lint_yaml:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: [3.7, 3.8, 3.9]
+
+    steps:
+      - name: check out
+        uses: actions/checkout@v4
+      - name: setup python
+        uses: actions/python-setup@v5
+        with:
+          python-version: ${{matrix.python}}
+      - name: test python
+        run: pytest
+
+  setup_python:
+    needs: [just_test, lint_yaml]
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: [3.7, 3.8, 3.9]
+    steps:
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: install dependency
+        run: |
+          python -m pip --upgrade pip
+          if [ -f requirement.txt ]; then pip -r install requirement.txt; fi
+      - name: run python
+        run: python firstproj.py
