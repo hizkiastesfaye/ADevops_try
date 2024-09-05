@@ -3,7 +3,8 @@ name: testing and building
 
 on:
   push:
-    branches: main
+    branches: 
+      - main
 
 jobs:
   just_test:
