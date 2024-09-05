@@ -50,6 +50,7 @@ jobs:
         run: python firstproj.py
 
   run_main_workflow:
-    uses: ./ci.yml  # Use main.yml as a reusable workflow
+    needs: build
+    uses: ./.github/workflows/ci.yml  # Use main.yml as a reusable workflow
     # with:
     #   python-version: '3.9'
